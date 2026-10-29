@@ -1,0 +1,10 @@
+# Versions below are the ones the test suite was run against.
+Django==5.2.18
+gunicorn==26.2.0
+psycopg2-binary==2.9.13
+argon2-cffi==25.1.0
+pyotp==2.10.0
+cryptography==50.0.2
+whitenoise==6.12.0
+django-cors-headers==4.9.0
+python-dotenv==1.2.4

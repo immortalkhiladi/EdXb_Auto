@@ -1,0 +1,33 @@
+/* EDGAR Agents LLC theme for the tool pages. views/tools.py stamps <html data-tool="<slug>"> and appends this sheet at
+   the end of each document, so these variables win over the tool's own :root values without editing the tool files.
+   Navy #0B1F3A / #14284B, turquoise #1DC8CD / #2EE6D6. Variable names are the ones each tool already uses. */
+
+/* GoFiler HTML Converter + Redline to GoFiler HTML */
+[data-tool="html-converter"], [data-tool="redline-to-gofiler-html"] {
+  --accent: #14a3a8; --accent-soft: #c6f7f4; --accent-ink: #0f7f83; --accent-fg: #0B1F3A;
+  --gold: #1DC8CD; --gold-deep: #14a3a8; --gold-soft: #c6f7f4; --on-gold: #0B1F3A; --done: #14a3a8; --done-soft: #c6f7f4;
+  --bg: #f3f6fa; --panel: #ffffff; --panel-2: #eef2f8; --fg: #0B1F3A; --muted: #3b5a88; --line: #d9e1ef;
+}
+@media (prefers-color-scheme: dark) {
+  [data-tool="html-converter"], [data-tool="redline-to-gofiler-html"] {
+    --accent: #1DC8CD; --accent-soft: #0c3a45; --accent-ink: #2EE6D6; --accent-fg: #0B1F3A;
+    --gold: #2EE6D6; --gold-deep: #1DC8CD; --gold-soft: #0c3a45; --on-gold: #0B1F3A; --done: #2EE6D6; --done-soft: #0c3a45;
+    --bg: #081529; --panel: #0B1F3A; --panel-2: #14284B; --fg: #e6ebf5; --muted: #8aa0c4; --line: #24406a;
+  }
+}
+
+/* PPT & PDF Converter */
+[data-tool="ppt-pdf-converter"] {
+  --p: #1DC8CD; --o: #2EE6D6; --v: #14284B; --glow1: rgba(29, 200, 205, .25); --glow2: rgba(20, 40, 75, .35);
+  --dash: rgba(29, 200, 205, .7); --shadow: 0 20px 50px -24px rgba(11, 31, 58, .45); --sel: #e8fcfb; --pre: #f3f6fa;
+}
+@media (prefers-color-scheme: dark) {
+  [data-tool="ppt-pdf-converter"] {
+    --bg1: #081529; --bg2: #0B1F3A; --bg3: #14284B; --sel: rgba(29, 200, 205, .18); --pre: rgba(0, 0, 0, .35);
+  }
+}
+
+/* SEC Form Type Dashboard (dark-only page) */
+[data-tool="sec-form-dashboard"] {
+  --bg: #081529; --card: #0B1F3A; --card2: #14284B; --bd: #24406a; --ac: #1DC8CD; --info: #2EE6D6;
+}

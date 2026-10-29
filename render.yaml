@@ -1,0 +1,57 @@
+# Render Blueprint for the EDGAR Agents LLC portal: one web service (Django serves the API and the built React app
+# from ONE origin) and a managed PostgreSQL database. Uploaded/generated files are stored INSIDE PostgreSQL
+# (STORAGE_BACKEND=database), so no persistent disk is needed. If you must read files from an older disk-based
+# deployment, add a disk (mountPath /var/data) and set STORAGE_LOCAL_DIR=/var/data/storage (see docs/DEPLOYMENT_GUIDE.md).
+services:
+  - type: web
+    name: edgar-agents-portal
+    runtime: python
+    plan: starter
+    region: oregon
+    buildCommand: bash deploy/render/build.sh
+    startCommand: bash backend/startup.sh
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: NODE_VERSION
+        value: 22.12.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings.production
+      - key: DJANGO_SECRET_KEY
+        generateValue: true          # 50+ random characters; keep it stable (it encrypts MFA secrets)
+      - key: ADMIN_MFA_REQUIRED
+        value: "true"
+      - key: STORAGE_BACKEND
+        value: database              # documents are stored INSIDE PostgreSQL (survive restarts, redeploys, new instances)
+      - key: DB_HOST
+        fromDatabase: { name: ea-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: ea-db, property: port }
+      - key: DB_NAME
+        fromDatabase: { name: ea-db, property: database }
+      - key: DB_USER
+        fromDatabase: { name: ea-db, property: user }
+      - key: DB_PASSWORD
+        fromDatabase: { name: ea-db, property: password }
+      - key: DB_SSLMODE
+        value: require
+      - key: DJANGO_ALLOWED_HOSTS
+        sync: false                  # your custom domain(s), comma separated; the *.onrender.com host is added automatically
+      - key: FRONTEND_URL
+        sync: false                  # e.g. https://portal.example.com (used in password-reset emails)
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+
+databases:
+  - name: ea-db
+    plan: basic-256mb
+    region: oregon
+    databaseName: edgar_agents
+    user: ea_app

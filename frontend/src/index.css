@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== EDGAR Agents LLC design tokens =====
+   One place for the brand palette: navy for backgrounds, headers and the sidebar; turquoise for accents, buttons,
+   active states and highlights; light neutrals for content. The UI's legacy `purple-*` utilities are remapped to the
+   navy scale and `orange-*` to the turquoise scale, so every component picks the brand up automatically;
+   `rose-*` stays red for errors / destructive actions, `emerald-*` green for success. */
+@theme {
+  --color-navy-50: #eef2f8;
+  --color-navy-100: #d9e1ef;
+  --color-navy-200: #b4c3de;
+  --color-navy-300: #8aa0c4;
+  --color-navy-400: #5f7aa6;
+  --color-navy-500: #3b5a88;
+  --color-navy-600: #24406a;
+  --color-navy-700: #14284B;
+  --color-navy-800: #0B1F3A;
+  --color-navy-900: #081529;
+  --color-navy-950: #050d1a;
+
+  --color-turquoise-50: #e8fcfb;
+  --color-turquoise-100: #c6f7f4;
+  --color-turquoise-200: #93eee9;
+  --color-turquoise-300: #5ee8df;
+  --color-turquoise-400: #2EE6D6;
+  --color-turquoise-500: #1DC8CD;
+  --color-turquoise-600: #14a3a8;
+  --color-turquoise-700: #0f7f83;
+  --color-turquoise-800: #0c6163;
+  --color-turquoise-900: #094a4c;
+  --color-turquoise-950: #06302f;
+
+  --color-purple-50: var(--color-navy-50);
+  --color-purple-100: var(--color-navy-100);
+  --color-purple-200: var(--color-navy-200);
+  --color-purple-300: var(--color-navy-300);
+  --color-purple-400: var(--color-navy-400);
+  --color-purple-500: var(--color-navy-500);
+  --color-purple-600: var(--color-navy-600);
+  --color-purple-700: var(--color-navy-700);
+  --color-purple-800: var(--color-navy-800);
+  --color-purple-900: var(--color-navy-900);
+  --color-purple-950: var(--color-navy-950);
+
+  --color-orange-50: var(--color-turquoise-50);
+  --color-orange-100: var(--color-turquoise-100);
+  --color-orange-200: var(--color-turquoise-200);
+  --color-orange-300: var(--color-turquoise-300);
+  --color-orange-400: var(--color-turquoise-400);
+  --color-orange-500: var(--color-turquoise-500);
+  --color-orange-600: var(--color-turquoise-600);
+  --color-orange-700: var(--color-turquoise-700);
+  --color-orange-800: var(--color-turquoise-800);
+  --color-orange-900: var(--color-turquoise-900);
+  --color-orange-950: var(--color-turquoise-950);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  code, pre, kbd {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Primary action surface (buttons, active navigation, avatar): turquoise on navy */
+.ea-primary {
+  background-color: var(--color-turquoise-500);
+  color: var(--color-navy-800);
+}
+.ea-primary:hover {
+  background-color: var(--color-turquoise-400);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(29, 200, 205, 0.45);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 200, 205, 0.8);
+}
+
+/* ===== Shared surfaces (light + dark) ===== */
+.ff-page {
+  background: #f3f6fa;
+}
+html.dark .ff-page {
+  background: var(--color-navy-950);
+}
+
+.ff-card {
+  background: #fff;
+  border-color: var(--color-navy-100);
+  box-shadow: 0 1px 2px rgba(11, 31, 58, 0.05), 0 8px 24px -16px rgba(11, 31, 58, 0.2);
+}
+html.dark .ff-card {
+  background: var(--color-navy-800);
+  border-color: var(--color-navy-600);
+  box-shadow: none;
+}
+
+/* Top bar: navy in both themes */
+.ff-nav-glass {
+  background: var(--color-navy-800);
+  border-bottom: 1px solid var(--color-navy-600);
+  color: #fff;
+}
+
+/* Dashboard sidebar: navy in both themes */
+.ff-side {
+  background: var(--color-navy-800);
+  border-right: 1px solid var(--color-navy-600);
+  color: #fff;
+}
+html.dark .ff-side {
+  background: var(--color-navy-900);
+}
