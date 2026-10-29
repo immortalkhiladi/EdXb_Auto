@@ -162,6 +162,7 @@ def test_no_hardcoded_credentials_in_source():
 
 
 def test_seed_users_reset_fixes_existing_database_and_is_refused_in_production(settings, tmp_path):
+    settings.SEED_USER_COUNT = 10  # default is now 0 (admin only); --reset must cover user08
     # the fixture already created users, so a plain run does nothing ...
     call_command("seed_users")
     assert not User.objects.get(username="user08").check_password("User@123")
